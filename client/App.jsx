@@ -1,32 +1,38 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { Component, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Login from './components/login';
 import Classroom from './components/classroom';
+import Signup from './components/signup';
 
 function App(props) {
-// dummy test
+  const [splash, setSplash] = useState('login');
+
   return (
-    <div>
-      <h1>Welcome to JavaScript Classroom!</h1>
-    </div>
+    <>
+      <header>
+        <h1>Welcome to JavaScript Classroom!</h1>
+      </header>
+      {/* { splash === 'login' && <Login splash={splash} setSplash={setSplash} /> }
+      { splash === 'signup' && <Signup /> } */}
+      <div className="router">
+        <Routes>
+          <Route
+            path="/"
+            element={<Login />}
+          />
+          <Route
+            path="/signup"
+            element={<Signup />}
+          />
+          {/* <Route
+            path="/app"
+            element={<Classroom />}
+          /> */}
+        </Routes>
+      </div>
+    </>
   );
-  // return (
-  //   <div className="router">
-  //     <Switch>
-  //       <Route
-  //         exact
-  //         path="/"
-  //         components={Login}
-  //       />
-  //       <Route
-  //         exact
-  //         path="/classroom"
-  //         components={Classroom}
-  //       />
-  //     </Switch>
-  //   </div>
-  // )
 }
 
 export default App;
