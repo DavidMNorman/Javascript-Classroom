@@ -2,12 +2,14 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const { NODE_ENV } = process.env;
+
 module.exports = {
-  mode: process.env.NODE_ENV,
-  entry: './client.index.js',
+  mode: NODE_ENV,
+  entry: './client/index.js',
 
   output: {
-    path: path.join(__dirname, '/build'),
+    path: path.join(__dirname, './build'),
     filename: 'bundle.js',
     publicPath: '/',
   },
@@ -18,7 +20,9 @@ module.exports = {
       template: './client/index.html',
     }),
   ],
-
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       {
@@ -31,7 +35,7 @@ module.exports = {
       },
       {
         test: /\.s?css/,
-        use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', {
+        use: [MiniCssExtractPlugin.loader, 'css-loader', {
           loader: 'sass-loader',
           options: {
             implementation: require('sass'),
@@ -42,12 +46,44 @@ module.exports = {
   },
   devServer: {
     static: {
-      publicPath: '/build',
-      directory: path.join(__dirname, '/build'),
+      publicPath: '/',
+      directory: path.join(__dirname, './dist'),
     },
-    port: 8080,
     proxy: {
-      '/': 'http://localhost:3000',
+      '/api/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+      '/assets/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+    },
+    hot: true,
+    compress: true,
+    port: 8080,
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 20000,
+      minRemainingSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
     },
   },
 };

@@ -4,9 +4,15 @@
   "description": "a digital classroom platform for k-12 JavaScript learning",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js --mode production",
+    "start": "NODE_ENV=production node server/server.js",
     "build": "webpack",
-    "dev": "webpack server --open --hot & node server/server.js --mode development"
+    "dev": "NODE_ENV=development webpack server --open --hot --progress --color & nodemon server/server.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "build",
+      "client"
+    ]
   },
   "author": "David Norman",
   "license": "ISC",

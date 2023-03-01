@@ -3,9 +3,12 @@ import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
-render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById('app'),
-);
+import styles from './scss/application.scss';
+
+// render(
+//   <BrowserRouter>
+//     <App />
+//   </BrowserRouter>,
+//   document.getElementById('app'),
+// );
+render(<App />);
