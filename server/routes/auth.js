@@ -1,14 +1,13 @@
 const express = require('express');
+const sessionController = require('../controllers/sessionController');
 
 const router = express.Router();
 
 router.get(
   '/',
-  // authentication middleware
-  // serve up a response
+  sessionController.isLoggedIn,
   (req, res) => {
-    console.log('passed auth in classroom router');
-    return res.status(200);
+    res.status(200).send(res.locals);
   },
 );
 

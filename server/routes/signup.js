@@ -4,7 +4,8 @@ const userController = require('../controllers/userController');
 
 const router = express.Router();
 
-router.get('/',
+router.get(
+  '/',
   // serve up the signup file
   (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
@@ -17,7 +18,7 @@ router.post(
   userController.addUser,
   (req, res) => {
     console.log('user creation complete');
-    return res.status(200).redirect('/login');
+    return res.status(200).redirect('/');
   },
 );
 

@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { render } from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Classroom from './classroom';
 
 export default function Login(props) {
   const [role, setRole] = useState('student');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleSubmit = async (e) => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  // const [history, setHistory] = useState();
+  // const [history, setHistory] = useState('');
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
     e.preventDefault();
     // const cookieId = Cookies.get('ssid');
     // const user_id = cookieId.slice(3,cookieId.length - 1);
@@ -16,15 +20,32 @@ export default function Login(props) {
       username,
       password,
     };
-    const response = await fetch('api/login', {
+    fetch('api/login', {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
         'Content-Type': 'application/json',
       },
-    });
-    await response.json();
+    })
+      .then((response) => {
+        console.log('in promise response handler with ', response.status);
+        if (response.status === 200) navigate('/app');
+        else console.log('failed to log in');
+        // response.json();
+      })
+      // .then((data) => {
+      //   console.log('parsed data is: ', data);
+      //   // if (data.auth === 200) {
+      //   //   setLoggedIn(true);
+      //   // } else {
+      //   //   console.log('failed to log in');
+      //   // }
+      // })
+      .catch((err) => {
+        console.log(`error in login submit: ${err}`);
+      });
   };
+  // if (loggedIn === true) navigate('/app');
 
   return (
     <>

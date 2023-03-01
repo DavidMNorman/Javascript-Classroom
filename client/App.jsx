@@ -6,8 +6,6 @@ import Classroom from './components/classroom';
 import Signup from './components/signup';
 
 function App(props) {
-  const [splash, setSplash] = useState('login');
-
   return (
     <>
       <header>
@@ -25,10 +23,10 @@ function App(props) {
             path="/signup"
             element={<Signup />}
           />
-          {/* <Route
+          <Route
             path="/app"
             element={<Classroom />}
-          /> */}
+          />
         </Routes>
       </div>
     </>

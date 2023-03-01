@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const userDb = require('../models/accountModels');
+const userDb = require('../models/accountModel');
 
 const userController = {};
 const SALT_WORK_FACTOR = 10;
@@ -67,6 +67,19 @@ userController.getStudents = async (req, res, next) => {
   // query databse with students
 
   // assign res.locals to the response of the query
+};
+
+userController.getID = async (req, res, next) => {
+  try {
+    const idQuery = `SELECT _id FROM ${req.body.role} WHERE username = '${req.body.username}'`;
+    const id = await userDb.query(idQuery);
+    res.locals.id = id._id;
+    return next();
+  } catch (e) {
+    return next({
+      log: `There was an error in userController.getID, ${e}`,
+    });
+  }
 };
 
 module.exports = userController;

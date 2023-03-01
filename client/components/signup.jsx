@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { render } from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // const cookieId = Cookies.get('ssid');
 // const user_id = cookieId.slice(3,cookieId.length - 1);
 
@@ -10,6 +10,7 @@ export default function Signup(props) {
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = {
@@ -20,14 +21,21 @@ export default function Signup(props) {
       fullName,
     };
     console.log(user);
-    const response = await fetch('api/signup', {
+    fetch('api/signup', {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
         'Content-Type': 'application/json',
       },
-    });
-    await response.json();
+    })
+      .then((response) => {
+        console.log('in promise response handler with ', response.status);
+        if (response.status === 200) navigate('/login');
+        else console.log('failed to sign up');
+      })
+      .catch((err) => {
+        console.log(`error in signup submit: ${err}`);
+      });
   };
   return (
     <>

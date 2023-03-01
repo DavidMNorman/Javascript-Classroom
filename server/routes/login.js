@@ -14,7 +14,7 @@ router.post(
   (req, res) => {
     if (res.locals.auth === true) {
       console.log(`${req.body.username} successfully logged in`);
-      return res.status(200).redirect('/app');
+      return res.status(200).send(res.locals);
     }
     console.log('login unsuccessful');
     return res.redirect('/login');
