@@ -49,7 +49,7 @@ export default function Login(props) {
   // if (loggedIn === true) navigate('/app');
 
   return (
-    <>
+    <div id="login">
       <header>
         <h1>Welcome to JavaScript Classroom!</h1>
         <h2>Log in to your account</h2>
@@ -57,27 +57,38 @@ export default function Login(props) {
       <form className="login" onSubmit={handleSubmit}>
         <label htmlFor="userRole">
           I am a...
+          <br />
           <select id="userRole" name="type" onChange={(e) => setRole(e.target.value)}>
             <option value="student">Student</option>
             <option value="teacher">Teacher</option>
           </select>
         </label>
+        <br />
         <label htmlFor="usernameBox">
           Username:
+          <br />
           <input id="usernameBox" name="username" type="text" placeholder="username" onChange={(e) => setUsername(e.target.value)} />
         </label>
+        <br />
         <label htmlFor="passwordBox">
+          Password:
+          <br />
           <input id="passwordBox" name="password" type="password" onChange={(e) => setPassword(e.target.value)} />
         </label>
+        <br />
         <label htmlFor="loginSubmit">
           <input id="loginSubmit" type="submit" />
         </label>
       </form>
+      <br />
+      <p>Don't have an account?</p>
       <Link to="/signup">
-        <button type="button">
-          Sign up!
-        </button>
+        <div className="button-container">
+          <button id="signup-button" type="button">
+            Sign up!
+          </button>
+        </div>
       </Link>
-    </>
+    </div>
   );
 }

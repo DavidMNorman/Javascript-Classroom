@@ -38,7 +38,7 @@ export default function Signup(props) {
       });
   };
   return (
-    <>
+    <div id="signup">
       <header>
         <h1>Welcome to JavaScript Classroom!</h1>
         <h2>Sign up</h2>
@@ -46,35 +46,47 @@ export default function Signup(props) {
       <form className="signup" onSubmit={handleSubmit}>
         <label htmlFor="userRole">
           I am a...
+          <br />
           <select id="userRole" name="type" onChange={(e) => setRole(e.target.value)}>
             <option value="student">Student</option>
             <option value="teacher">Teacher</option>
           </select>
         </label>
+        <br />
         <label htmlFor="usernameBox">
           Username:
+          <br />
           <input id="usernameBox" name="username" type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
         </label>
+        <br />
         <label htmlFor="passwordBox">
+          Password:
+          <br />
           <input id="passwordBox" name="password" type="Password" onChange={(e) => setPassword(e.target.value)} />
         </label>
         <label htmlFor="emailBox">
           Email:
+          <br />
           <input id="emailBox" name="email" type="Email" placeholder="email" onChange={(e) => setEmail(e.target.value)} />
         </label>
+        <br />
         <label htmlFor="fullNameBox">
           Full Name:
+          <br />
           <input id="fullNameBox" name="fullName" type="text" placeholder="Full Name" onChange={(e) => setFullName(e.target.value)} />
         </label>
+        <br />
         <label htmlFor="signupSubmit">
           <input id="signupSubmit" type="submit" />
         </label>
       </form>
+      <br />
+      <p>Already Have An Account?</p>
       <Link to="/">
         <button type="button">
-          Already Have An Account?
+          Log in!
         </button>
       </Link>
-    </>
+    </div>
   );
 }

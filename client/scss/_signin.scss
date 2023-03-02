@@ -1,3 +1,18 @@
 body {
-  background-color: $paleAqua;
+  background-color: $paleTan;
+  color: $darkGray;
+  // text-align: center;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+}
+.login, h1, h2, p, #button-container, .signup, button {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
 }
