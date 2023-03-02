@@ -16,4 +16,19 @@ router.get(
   },
 );
 
+router.post(
+  '/',
+  async (req, res) => {
+    try {
+      const assign = req.body;
+      await models.Assignment.create({
+        name: assign.name, description: assign.desc, dueDate: assign.due
+      });
+      return res.status(200).send('yeah boiiiiii');
+    } catch (e) {
+      return console.log(`Hey buddy, you got a big e problem in assign posting ${e}`);
+    }
+  },
+);
+
 module.exports = router;

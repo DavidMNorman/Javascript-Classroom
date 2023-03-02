@@ -6,8 +6,30 @@ body {
   // flex-direction: column;
   // align-items: center;
   // justify-content: center;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif
 }
-.login, h1, h2, p, #button-container, .signup, button {
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.assignment-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
+.assignment-card {
+  margin: 5px solid black;
+  border: 1px solid black;
+  background: $lightGreen;
+  padding: 5px;
+
+}
+#login, h1, h2, p, .button-container, .signup, button {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -15,4 +37,52 @@ body {
   justify-content: center;
   text-align: center;
   margin: auto;
+}
+// <!-- HTML !-->
+// <button class="button-25" role="button">Button 25</button>
+
+button, select, .submit {
+  background-color: #36A9AE;
+  background-image: linear-gradient(#37ADB2, #329CA0);
+  border: 1px solid #2A8387;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: block;
+  font-family: -apple-system,".SFNSDisplay-Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 17px;
+  line-height: 100%;
+  margin: 0;
+  outline: 0;
+  padding: 11px 15px 12px;
+  text-align: center;
+  transition: box-shadow .05s ease-in-out,opacity .05s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+}
+
+button:hover {
+  box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
+  text-decoration: none;
+  transition-duration: .15s, .15s;
+}
+
+button:active {
+  box-shadow: rgba(0, 0, 0, 0.15) 0 2px 4px inset, rgba(0, 0, 0, 0.4) 0 1px 1px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+button:disabled:active {
+  pointer-events: none;
+}
+
+button:disabled:hover {
+  box-shadow: none;
 }

@@ -30,7 +30,7 @@ function App(props) {
             element={<TeacherClassroom />}
           />
           <Route
-            path="/app/teacher"
+            path="/app/student"
             element={<StudentClassroom />}
           />
         </Routes>
