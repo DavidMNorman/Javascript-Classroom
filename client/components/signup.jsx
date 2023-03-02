@@ -29,7 +29,7 @@ export default function Signup(props) {
       },
     })
       .then((response) => {
-        console.log('in promise response handler with ', response.status);
+        console.log('in signup promise response handler with ', response.status);
         if (response.status === 200) navigate('/login');
         else console.log('failed to sign up');
       })

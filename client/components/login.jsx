@@ -28,7 +28,7 @@ export default function Login(props) {
       },
     })
       .then((response) => {
-        console.log('in promise response handler with ', response.status);
+        console.log('in login promise response handler with ', response.status);
         if (response.status === 200) navigate('/app');
         else console.log('failed to log in');
         // response.json();

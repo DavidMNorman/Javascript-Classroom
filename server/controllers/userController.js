@@ -46,8 +46,8 @@ userController.verifyUser = async (req, res, next) => {
     const user = await userDb.query(verifyQuery);
     console.log('returned user is: ', user.rows[0].password);
     // compare returned password with bcrypt compare
-    res.locals.auth = await bcrypt.compare(req.body.password, user.rows[0].password);
-    console.log(res.locals.auth);
+    res.locals.valid = await bcrypt.compare(req.body.password, user.rows[0].password);
+    console.log(res.locals.valid);
     return next();
   } catch (e) {
     console.log(e);

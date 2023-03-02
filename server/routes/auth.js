@@ -12,7 +12,9 @@ router.get(
   },
   sessionController.isLoggedIn,
   (req, res) => {
-    res.status(200).send(res.locals);
+    const responseObj = { auth: res.locals.auth };
+    console.log('auth response should be: ', responseObj);
+    res.status(200).send(responseObj);
   },
 );
 

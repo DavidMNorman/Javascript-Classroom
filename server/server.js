@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -9,6 +10,12 @@ const signupRouter = require('./routes/signup');
 const loginRouter = require('./routes/login');
 const classroomRouter = require('./routes/classroom');
 const authRouter = require('./routes/auth');
+
+const MONGO_URI = "mongodb+srv://jsclassadmin:Ve3HDuMFndXA7inH@js-classroom-db.oy8lwan.mongodb.net/?retryWrites=true&w=majority";
+mongoose.connect(MONGO_URI, { useNewUrlParser: true })
+const mdb = mongoose.connection;
+mdb.on('error', (error) => console.error(error));
+mdb.once('open', () => console.log('Connected to Mongoose'));
 
 // const PORT = process.env.NODE_ENV === 'production' ? 3000 : 8080;
 const PORT = 3000;

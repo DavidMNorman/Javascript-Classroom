@@ -13,16 +13,18 @@ router.get(
 router.post(
   '/',
   userController.verifyUser,
+  (req, res, next) => {
+    if (res.locals.valid === false) return res.redirect('/login');
+    return next();
+  },
   userController.getID,
   cookieController.setSSIDCookie,
+  sessionController.isLoggedIn,
   sessionController.startSession,
   (req, res) => {
-    if (res.locals.auth === true) {
-      console.log(`${req.body.username} successfully logged in`);
-      return res.status(200).send(res.locals);
-    }
-    console.log('login unsuccessful');
-    return res.redirect('/login');
+    console.log(`${req.body.username} successfully logged in`);
+    // console.log(res.locals);
+    return res.status(200).send({ auth: res.locals.auth });
   },
 );
 
