@@ -1,20 +1,21 @@
 const mongoose = require('mongoose');
 
-// mongoose.connect(MONGO_URI, {
-//   // options for the connect method to parse the URI
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   // sets the name of the DB that our collections are part of
-//   dbName: 'JS-Classroom-DB',
-// })
-//   .then(() => console.log('Connected to Mongo DB.'))
-//   .catch((err) => console.log(err));
-
 const Schema = mongoose.Schema;
 
 const sessionSchema = new Schema({
   cookieId: { type: String, required: true, unique: true },
   createdAt: { type: Date, expires: 86400, default: Date.now },
 });
+const Session = mongoose.model('Session', sessionSchema);
 
-module.exports = mongoose.model('Session', sessionSchema);
+const assignmentSchema = new Schema({
+  name: { type: String, required: true, unique: false },
+  description: String,
+  dueDate: String,
+});
+const Assignment = mongoose.model('Assignment', assignmentSchema);
+
+module.exports = {
+  Session,
+  Assignment,
+};

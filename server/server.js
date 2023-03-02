@@ -10,6 +10,7 @@ const signupRouter = require('./routes/signup');
 const loginRouter = require('./routes/login');
 const classroomRouter = require('./routes/classroom');
 const authRouter = require('./routes/auth');
+const assignRouter = require('./routes/assignments');
 
 const MONGO_URI = "mongodb+srv://jsclassadmin:Ve3HDuMFndXA7inH@js-classroom-db.oy8lwan.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(MONGO_URI, { useNewUrlParser: true })
@@ -39,11 +40,14 @@ app.get(
 app.use('/api/signup', signupRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/app', classroomRouter);
+app.use('/app/api/auth', authRouter);
 app.use('/api/auth', authRouter);
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/app', classroomRouter);
 app.use('/auth', authRouter);
+app.use('/app/api/assignments', assignRouter);
+app.use('/api/assignments', assignRouter);
 
 // catch-all route handler
 app.use((_, res) => res.status(404).send('Page Not Found'));

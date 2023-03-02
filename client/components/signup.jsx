@@ -39,6 +39,10 @@ export default function Signup(props) {
   };
   return (
     <>
+      <header>
+        <h1>Welcome to JavaScript Classroom!</h1>
+        <h2>Sign up</h2>
+      </header>
       <form className="signup" onSubmit={handleSubmit}>
         <label htmlFor="userRole">
           I am a...

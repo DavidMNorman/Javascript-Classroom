@@ -67,6 +67,10 @@ module.exports = {
         target: 'http://localhost:3000/',
         secure: false,
       },
+      '/app/api/auth': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
     },
     hot: true,
     compress: true,

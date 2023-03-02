@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { render } from 'react-dom';
 import { Link, useNavigate } from 'react-router-dom';
-import Classroom from './classroom';
+import Classroom from './TeacherClassroom';
 
 export default function Login(props) {
   const [role, setRole] = useState('student');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
+  // const [loggedIn, setLoggedIn] = useState(false);
   // const [history, setHistory] = useState();
   // const [history, setHistory] = useState('');
   const navigate = useNavigate();
@@ -29,8 +29,9 @@ export default function Login(props) {
     })
       .then((response) => {
         console.log('in login promise response handler with ', response.status);
-        if (response.status === 200) navigate('/app');
-        else console.log('failed to log in');
+        if (response.status === 200 && role === 'teacher') navigate('/app/teacher');
+        if (response.status === 200 && role === 'student') navigate('/app/student');
+        // else console.log('failed to log in');
         // response.json();
       })
       // .then((data) => {
@@ -49,6 +50,10 @@ export default function Login(props) {
 
   return (
     <>
+      <header>
+        <h1>Welcome to JavaScript Classroom!</h1>
+        <h2>Log in to your account</h2>
+      </header>
       <form className="login" onSubmit={handleSubmit}>
         <label htmlFor="userRole">
           I am a...

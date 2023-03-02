@@ -4,6 +4,8 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 export default function Classroom(props) {
   // const [token, setToken] = useState();
+  // const [role, setRole] = useState();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +18,7 @@ export default function Classroom(props) {
       .then((response) => response.json())
       .then((response) => {
         console.log('in auth promise response handler with ', response.auth);
-        if (response.auth === false) navigate('/login');
+        if (response.auth === false) navigate('/');
       })
       .catch((err) => {
         console.log(`error in toekn auth: ${err}`);
@@ -25,7 +27,7 @@ export default function Classroom(props) {
 
   return (
     <>
-      <h1>Classroom Component</h1>
+      <h1>Classroom Component for Students</h1>
       <p>Put some stuff here</p>
     </>
   );
