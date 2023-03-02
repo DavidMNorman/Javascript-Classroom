@@ -4,9 +4,30 @@ const cookieController = {};
 //   return next();
 // };
 
+const cyrb53 = (str, seed = 0) => {
+  let h1 = 0xdeadbeef ^ seed;
+  let h2 = 0x41c6ce57 ^ seed;
+  for (let i = 0, ch; i < str.length; i++) {
+    ch = str.charCodeAt(i);
+    h1 = Math.imul(h1 ^ ch, 2654435761);
+    h2 = Math.imul(h2 ^ ch, 1597334677);
+  }
+
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+
+  return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+};
+
 cookieController.setSSIDCookie = (req, res, next) => {
-  // console.log('in setSSIDCookie');
-  if (req.cookies.SSID !== res.locals.id) res.cookie('SSID', `${res.locals.id}`, { httpOnly: true });
+  console.log('in setSSIDCookie');
+  console.log('req.cookies.SSID before setting ', req.cookies.SSID);
+  console.log('res.locals.id is ', res.locals.id);
+  const cookieID = cyrb53(res.locals.id);
+  console.log('cookieID is ', cookieID);
+  res.locals.cookieID = cookieID;
+  console.log('res.locals.coookieID in setCookie: ', res.locals.cookieID);
+  if (req.cookies.SSID !== cookieID) res.cookie('SSID', `${cookieID}`, { httpOnly: true });
   return next();
 };
 

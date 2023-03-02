@@ -20,16 +20,6 @@ app.use(cookieParser());
 
 // handle requests for static files
 app.use(express.static(path.resolve(__dirname, '../client')));
-
-// route handlers
-app.use('/api/signup', signupRouter);
-// app.use('/signup', signupRouter);
-app.use('/api/login', loginRouter);
-app.use('/api/app', classroomRouter);
-app.use('/app', classroomRouter);
-app.use('/auth', authRouter);
-app.use('/api/auth', authRouter);
-
 app.get(
   '/',
   (req, res) => {
@@ -38,6 +28,15 @@ app.get(
   },
 );
 
+// route handlers
+app.use('/api/signup', signupRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/app', classroomRouter);
+app.use('/api/auth', authRouter);
+app.use('/signup', signupRouter);
+app.use('/login', loginRouter);
+app.use('/app', classroomRouter);
+app.use('/auth', authRouter);
 
 // catch-all route handler
 app.use((_, res) => res.status(404).send('Page Not Found'));

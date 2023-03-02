@@ -71,9 +71,12 @@ userController.getStudents = async (req, res, next) => {
 
 userController.getID = async (req, res, next) => {
   try {
-    const idQuery = `SELECT _id FROM ${req.body.role} WHERE username = '${req.body.username}'`;
+    console.log('in getID');
+    const idQuery = `SELECT id FROM ${req.body.role} WHERE username = '${req.body.username}'`;
+    console.log(`querying: SELECT id FROM ${req.body.role} WHERE username = '${req.body.username}'`);
     const id = await userDb.query(idQuery);
-    res.locals.id = id._id;
+    console.log('object returned from query is ', id.rows[0].id);
+    res.locals.id = `${id.rows[0].id}${req.body.role}`;
     return next();
   } catch (e) {
     return next({

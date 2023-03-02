@@ -9,19 +9,9 @@ module.exports = {
   entry: './client/index.js',
 
   output: {
-    path: path.join(__dirname, './build'),
+    path: path.resolve(__dirname, './build'),
     filename: 'bundle.js',
-    publicPath: '/',
-  },
-  plugins: [
-    new MiniCssExtractPlugin(),
-    new HTMLWebpackPlugin({
-      title: 'Development',
-      template: './client/index.html',
-    }),
-  ],
-  resolve: {
-    extensions: ['.js', '.jsx'],
+    // publicPath: '/',
   },
   module: {
     rules: [
@@ -44,6 +34,16 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new HTMLWebpackPlugin({
+      title: 'Development',
+      template: path.join(__dirname, './client/index.html'),
+    }),
+  ],
   devServer: {
     static: {
       publicPath: '/',
@@ -63,32 +63,36 @@ module.exports = {
         target: 'http://localhost:3000/',
         secure: false,
       },
+      '/auth/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
     },
     hot: true,
     compress: true,
     port: 8080,
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'async',
-      minSize: 20000,
-      minRemainingSize: 0,
-      minChunks: 1,
-      maxAsyncRequests: 30,
-      maxInitialRequests: 30,
-      enforceSizeThreshold: 50000,
-      cacheGroups: {
-        defaultVendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10,
-          reuseExistingChunk: true,
-        },
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true,
-        },
-      },
-    },
-  },
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'async',
+  //     minSize: 20000,
+  //     minRemainingSize: 0,
+  //     minChunks: 1,
+  //     maxAsyncRequests: 30,
+  //     maxInitialRequests: 30,
+  //     enforceSizeThreshold: 50000,
+  //     cacheGroups: {
+  //       defaultVendors: {
+  //         test: /[\\/]node_modules[\\/]/,
+  //         priority: -10,
+  //         reuseExistingChunk: true,
+  //       },
+  //       default: {
+  //         minChunks: 2,
+  //         priority: -20,
+  //         reuseExistingChunk: true,
+  //       },
+  //     },
+  //   },
+  // },
 };

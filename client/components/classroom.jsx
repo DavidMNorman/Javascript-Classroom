@@ -8,7 +8,6 @@ export default function Classroom(props) {
   const confirmToken = async () => {
     fetch('api/auth', {
       method: 'GET',
-      body: JSON.stringify(user),
       headers: {
         'Content-Type': 'application/json',
       },

@@ -1,5 +1,7 @@
 const express = require('express');
 const userController = require('../controllers/userController');
+const cookieController = require('../controllers/cookieController');
+const sessionController = require('../controllers/sessionController');
 
 const router = express.Router();
 
@@ -11,6 +13,9 @@ router.get(
 router.post(
   '/',
   userController.verifyUser,
+  userController.getID,
+  cookieController.setSSIDCookie,
+  sessionController.startSession,
   (req, res) => {
     if (res.locals.auth === true) {
       console.log(`${req.body.username} successfully logged in`);
