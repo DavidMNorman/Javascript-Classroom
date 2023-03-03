@@ -9,10 +9,27 @@ router.get(
   '/',
   async (req, res) => {
     const assignments = await models.Assignment.find();
-    console.log(`found ${assignments} from mongodb`);
-    console.log('assignment find response type is array? ', Array.isArray(assignments));
+    // console.log(`found ${assignments} from mongodb`);
+    // console.log('assignment find response type is array? ', Array.isArray(assignments));
     res.locals.assignments = assignments;
     return res.status(200).send({ assignments: res.locals.assignments });
+  },
+);
+
+router.put(
+  '/',
+  async (req, res) => {
+    try {
+      console.log('in assignment put req with, ', req.body);
+      const saved = await models.Assignment.findOneAndUpdate(
+        { _id: req.body.id },
+        { body: req.body.main },
+      );
+      console.log('assignment update complete');
+      return res.status(200).send('Assignment saved');
+    } catch (e) {
+      return console.log(`Error ${e} in assignment updator`);
+    }
   },
 );
 

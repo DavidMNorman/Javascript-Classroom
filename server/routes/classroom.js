@@ -7,8 +7,8 @@ router.get(
   // authentication middleware
   // serve up a response
   (req, res) => {
-    console.log('passed auth in classroom router');
-    return res.status(200);
+    // console.log('passed auth in classroom router');
+    res.status(200);
   },
 );
 

@@ -12,6 +12,7 @@ const assignmentSchema = new Schema({
   name: { type: String, required: true, unique: false },
   description: String,
   dueDate: String,
+  body: String,
 });
 const Assignment = mongoose.model('Assignment', assignmentSchema);
 

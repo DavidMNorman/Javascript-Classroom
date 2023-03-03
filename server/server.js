@@ -31,7 +31,7 @@ app.use(express.static(path.resolve(__dirname, '../client')));
 app.get(
   '/',
   (req, res) => {
-    console.log('in main url path');
+    // console.log('in main url path');
     res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
   },
 );

@@ -6,6 +6,7 @@ import AssignmentCard from './AssignmentCard';
 export default function Classroom(props) {
   // const [token, setToken] = useState();
   // const [role, setRole] = useState();
+  const role = 'teacher';
   const [assignments, setAssignments] = useState(0);
   const [assignmentElems, setAssignmentElems] = useState([]);
   const [adding, setAdding] = useState(false);
@@ -22,6 +23,7 @@ export default function Classroom(props) {
         name={assign.name}
         desc={assign.description}
         due={assign.dueDate}
+        role={role}
       />
       <button type="button" onClick={handleEdit}>Edit</button>
     </div>
@@ -138,6 +140,12 @@ export default function Classroom(props) {
         <Link to="/app/Teacher">
           <button type="button">
             Re-render to test auth!
+          </button>
+        </Link>
+        <br />
+        <Link to="/">
+          <button className="logout" type="button">
+            Log Out
           </button>
         </Link>
       </main>

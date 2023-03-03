@@ -25,7 +25,7 @@ userController.addUser = async (req, res, next) => {
     if (user.role === 'teacher') createReq = 'INSERT INTO teacher (username, password, email, name) VALUES ($1, $2, $3, $4) ';
     else createReq = 'INSERT INTO student (username, password, email, name) VALUES ($1, $2, $3, $4) ';
     await userDb.query(createReq, [user.username, user.password, user.email, user.fullName]);
-    console.log('user created for req.body.username');
+    // console.log('user created for req.body.username');
     return next();
   } catch (e) {
     console.log(e);
@@ -39,15 +39,15 @@ userController.addUser = async (req, res, next) => {
 
 userController.verifyUser = async (req, res, next) => {
   try {
-    console.log('in verify user');
-    console.log(req.body);
+    // console.log('in verify user');
+    // console.log(req.body);
     const verifyQuery = `SELECT password FROM ${req.body.role} WHERE username = '${req.body.username}'`;
     // if (user.role === 'teacher') verifyQuery = 'SELECT password FROM teacher WHERE '
     const user = await userDb.query(verifyQuery);
-    console.log('returned user is: ', user.rows[0].password);
+    // console.log('returned user is: ', user.rows[0].password);
     // compare returned password with bcrypt compare
     res.locals.valid = await bcrypt.compare(req.body.password, user.rows[0].password);
-    console.log(res.locals.valid);
+    // console.log(res.locals.valid);
     return next();
   } catch (e) {
     console.log(e);
@@ -71,11 +71,11 @@ userController.getStudents = async (req, res, next) => {
 
 userController.getID = async (req, res, next) => {
   try {
-    console.log('in getID');
+    // console.log('in getID');
     const idQuery = `SELECT id FROM ${req.body.role} WHERE username = '${req.body.username}'`;
-    console.log(`querying: SELECT id FROM ${req.body.role} WHERE username = '${req.body.username}'`);
+    // console.log(`querying: SELECT id FROM ${req.body.role} WHERE username = '${req.body.username}'`);
     const id = await userDb.query(idQuery);
-    console.log('object returned from query is ', id.rows[0].id);
+    // console.log('object returned from query is ', id.rows[0].id);
     res.locals.id = `${id.rows[0].id}${req.body.role}`;
     return next();
   } catch (e) {

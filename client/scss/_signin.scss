@@ -86,3 +86,12 @@ button:disabled:active {
 button:disabled:hover {
   box-shadow: none;
 }
+
+.logout {
+  background-color: #a0afb0;
+  background-image: linear-gradient(#ceebec, #e6f6f7);
+  border: 1px solid #2A8387;
+  color: #2A8387;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
+}

@@ -7,7 +7,7 @@ const router = express.Router();
 router.get(
   '/',
   (req, res, next) => {
-    console.log('in auth router with req these cookies: ', req.cookies);
+    // console.log('in auth router with req these cookies: ', req.cookies);
     res.locals.cookieID = req.cookies.SSID;
     return next();
   },
