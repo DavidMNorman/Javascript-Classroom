@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const MONGO_URI = 'mongodb+srv://jsclassadmin:Ve3HDuMFndXA7inH@js-classroom-db.oy8lwan.mongodb.net/?retryWrites=true&w=majority';
+const { MONGO_URI } = process.env;
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
@@ -10,7 +10,7 @@ mongoose.connect(MONGO_URI, {
   .then(() => console.log('Connected to Mongo DB.'))
   .catch((err) => console.log(err));
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const assignment = new Schema ({
   
